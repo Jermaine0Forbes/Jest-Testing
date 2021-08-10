@@ -7,6 +7,7 @@
 
 ## Jest Dom 
 - [toBeInTheDocument][jd-tbitd]
+- [toHaveStyle][jd-ths]
 
 ## React
 - [how to simulate an event][sim-event]
@@ -15,6 +16,7 @@
 - [Support for the experimental syntax 'jsx' isn't currently enabled][err-1]
 - [ReferenceError: document is not defined][err-2]
 
+[jd-ths]:#toHaveStyle
 [jd-tbitd]:#tobeinthedocument
 [install-jest-dom]:#how-to-setup-jest-dom
 [err-3]:#document-is-not-defined
@@ -25,6 +27,31 @@
 [home]:#jest-testing
 [inst-jest]:#how-to-install-jest
 
+### toHaveStyle
+
+<details>
+<summary>
+View Content
+</summary>
+
+:link: **Reference**
+- [jest-dom](https://github.com/testing-library/jest-dom#tohavestyle)
+---
+
+This method will check if a specific element is has a specific inline style in a object format like so
+
+```js
+  test("to have certain styles", () => {
+     const  {container} = render(<ColorBox height="10" width={10} color="blue" />)
+     const box = container.querySelector("#color-box");
+     expect(box).toHaveStyle({height:"10px", width:"10px", background:"blue"})
+  })
+
+```
+
+</details>
+
+[go back :house:][home]
 
 ### toBeInTheDocument
 

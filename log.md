@@ -1,6 +1,67 @@
 
 # Logs 
 
+##  8-10-21
+
+### jest-dom toBeVisible
+
+```jsx
+
+const App = () => {
+    const 
+    [food, setFood] = useState("pizza"),
+    handleFood = (e) => {
+        setFood(e.target.dataset.food)
+    };
+
+```
+
+```jsx
+    <section>
+        <div className="btn-group mb-4" role="group" aria-label="Basic example">
+            <button type="button" aria-label="pizza-btn" className="btn btn-primary px-5" data-food="pizza" onClickCapture={(e) => {handleFood(e)}} ><i className="fas fa-pizza-slice"></i></button>
+            <button type="button" aria-label="icecream-btn" className="btn btn-warning px-5" data-food="icecream" onClickCapture={(e) => {handleFood(e)}} ><i className="fas fa-ice-cream text-white"></i></button>
+            <button type="button" aria-label="hamburger-btn" className="btn btn-success px-5" data-food="hamburger" onClick={(e) => {handleFood(e)}} ><i className="fas fa-hamburger"></i></button>
+        </div>
+        <div className="d-flex justify-content-between col-md-5">
+            <ul className=" list-group" aria-label="pizza-menu" style={food == "pizza" ? {display:"block"} :{display:"none"}}>
+                <li className="list-group-item bg-primary text-white">pizza item 1</li>
+                <li className="list-group-item bg-primary text-white">pizza item 2</li>
+                <li className="list-group-item bg-primary text-white">pizza item 3</li>
+            </ul>
+            <ul className="bg-warning list-group" aria-label="icecream-menu" style={food == "icecream" ? {display:"block"} :{display:"none"}}>
+                <li className="list-group-item bg-warning text-white">icecream item 1</li>
+                <li className="list-group-item bg-warning text-white">icecream item 2</li>
+                <li className="list-group-item bg-warning text-white">icecream item 3</li>
+            </ul>
+            <ul className="bg-success list-group" aria-label="hamburger-menu" style={food == "hamburger" ? {display:"block"} :{display:"none"}}>
+                <li className="list-group-item bg-success text-white">hamburger item 1</li>
+                <li className="list-group-item bg-success text-white">hamburger item 2</li>
+                <li className="list-group-item bg-success text-white">hamburger item 3</li>
+            </ul>
+        </div>
+    </section>
+```
+
+```js
+  it("should display a new food menu when you click on a different food icon and hide the previous food menu", () => {
+
+    render(<App/>)
+
+    const btn = screen.getByRole("button",{name:/icecream-btn/i})
+    const currentFoodMenu = screen.getByRole("list",{name:/pizza-menu/i})
+    const newFoodMenu = screen.getByRole("list",{name:/icecream-menu/i});
+
+    fireEvent.click(btn)
+
+    expect(btn).toHaveAttribute("data-food","icecream")
+    expect(currentFoodMenu).toBeInTheDocument();
+    expect(newFoodMenu).toBeVisible();
+    expect(currentFoodMenu).not.toBeVisible();
+
+  })
+
+```
 
 ## 8-8-21
 
