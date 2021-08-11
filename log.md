@@ -14,10 +14,9 @@ const App = () => {
         setFood(e.target.dataset.food)
     };
 
-```
+ return(
 
-```jsx
-    <section>
+     <section>
         <div className="btn-group mb-4" role="group" aria-label="Basic example">
             <button type="button" aria-label="pizza-btn" className="btn btn-primary px-5" data-food="pizza" onClickCapture={(e) => {handleFood(e)}} ><i className="fas fa-pizza-slice"></i></button>
             <button type="button" aria-label="icecream-btn" className="btn btn-warning px-5" data-food="icecream" onClickCapture={(e) => {handleFood(e)}} ><i className="fas fa-ice-cream text-white"></i></button>
@@ -41,6 +40,8 @@ const App = () => {
             </ul>
         </div>
     </section>
+ )   
+
 ```
 
 ```js
@@ -48,16 +49,16 @@ const App = () => {
 
     render(<App/>)
 
-    const btn = screen.getByRole("button",{name:/icecream-btn/i})
-    const currentFoodMenu = screen.getByRole("list",{name:/pizza-menu/i})
-    const newFoodMenu = screen.getByRole("list",{name:/icecream-menu/i});
+    const btn = screen.getByRole("button",{name:/icecream-btn/i}) // gets the icecream button based on the role and the aria-label
+    const currentFoodMenu = screen.getByRole("list",{name:/pizza-menu/i}) // gets the pizza list based on the role and the aria-label
+    const newFoodMenu = screen.getByRole("list",{name:/icecream-menu/i}); // gets the icecream list based on the role and the aria-label
 
-    fireEvent.click(btn)
+    fireEvent.click(btn)// simulates a click event for the icecream button
 
     expect(btn).toHaveAttribute("data-food","icecream")
     expect(currentFoodMenu).toBeInTheDocument();
-    expect(newFoodMenu).toBeVisible();
-    expect(currentFoodMenu).not.toBeVisible();
+    expect(newFoodMenu).toBeVisible(); // checks if the icecream menu will appear when you click on the icecream button
+    expect(currentFoodMenu).not.toBeVisible(); // checks to see if the list is hidden when you click on the icecream button
 
   })
 

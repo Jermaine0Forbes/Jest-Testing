@@ -8,6 +8,10 @@
 ## Jest Dom 
 - [toBeInTheDocument][jd-tbitd]
 - [toHaveStyle][jd-ths]
+- [toHaveClass][jd-thc]
+- [toHaveAttribute][jd-tha]
+- [toBeVisible][jd-tbv]
+- [how to see how the component is rendered][jd-debug]
 
 ## React
 - [how to simulate an event][sim-event]
@@ -16,6 +20,10 @@
 - [Support for the experimental syntax 'jsx' isn't currently enabled][err-1]
 - [ReferenceError: document is not defined][err-2]
 
+[jd-debug]:#how-to-see-how-the-component-is-rendered
+[jd-tbv]:#toBeVisible
+[jd-tha]:#toHaveAttribute
+[jd-thc]:#toHaveClass
 [jd-ths]:#toHaveStyle
 [jd-tbitd]:#tobeinthedocument
 [install-jest-dom]:#how-to-setup-jest-dom
@@ -26,6 +34,142 @@
 [test-react]:#how-to-test-react-app
 [home]:#jest-testing
 [inst-jest]:#how-to-install-jest
+
+### how to see how the component is rendered
+
+<details>
+<summary>
+View Content
+</summary>
+
+---
+:blue_book: **Summary:** The **debug** method allows you to view how a component is rendered through the console. 
+It's pretty helpful
+
+```js
+  test('to have class', () => {
+
+    const {debug, container} = render(<ColorBox/>)
+    debug() // outputs how the component will be rendered
+    const box = container.querySelector("#color-box");
+    expect(box).toHaveClass("my-5")
+  })
+```
+
+</details>
+
+[go back :house:][home]
+
+
+### toBeVisible
+
+<details>
+<summary>
+View Content
+</summary>
+
+:link: **Reference**
+- [jest-dom](https://github.com/testing-library/jest-dom#tobevisible)
+
+---
+:blue_book: **Summary:** This allows you to check if an element is currently visible to the user.
+
+An element is visible if all the following conditions are met:
+
+- it is present in the document
+- it does not have its css property display set to none
+- it does not have its css property visibility set to either hidden or collapse
+- it does not have its css property opacity set to 0
+- its parent element is also visible (and so on up to the top of the DOM tree)
+- it does not have the hidden attribute
+- if <details /> it has the open attribute
+
+```js
+  it("should display a new food menu when you click on a different food icon and hide the previous food menu", () => {
+
+    render(<App/>)
+
+    const btn = screen.getByRole("button",{name:/icecream-btn/i}) // gets the icecream button based on the role and the aria-label
+    const currentFoodMenu = screen.getByRole("list",{name:/pizza-menu/i}) // gets the pizza list based on the role and the aria-label
+    const newFoodMenu = screen.getByRole("list",{name:/icecream-menu/i}); // gets the icecream list based on the role and the aria-label
+
+    fireEvent.click(btn)// simulates a click event for the icecream button
+
+    expect(btn).toHaveAttribute("data-food","icecream")
+    expect(currentFoodMenu).toBeInTheDocument();
+    expect(newFoodMenu).toBeVisible(); // checks if the icecream menu will appear when you click on the icecream button
+    expect(currentFoodMenu).not.toBeVisible(); // checks to see if the list is hidden when you click on the icecream button
+
+  })
+
+</details>
+
+[go back :house:][home]
+
+### toHaveAttribute
+
+<details>
+<summary>
+View Content
+</summary>
+
+:link: **Reference**
+- [jest-dom](https://github.com/testing-library/jest-dom#tohaveattribute)
+
+---
+:blue_book: **Summary:** basically it checks the value of the attribute
+
+```jsx
+const Counter = ({counter}) => {
+    return (
+        <div id="counter-container">
+            <p data-testid="counter-value" className="counter-value">{counter}</p>
+        </div>
+    )
+}
+```
+
+```js
+describe("CounterContainer has been rendered", () => {
+
+    it("should have an attribute called counter-value",() => {
+        render(<CounterContainer/>)
+        expect(screen.getByTestId("counter-value")).toHaveAttribute("class", "counter-value");
+    })
+});
+```
+
+</details>
+
+[go back :house:][home]
+
+### toHaveClass
+
+<details>
+<summary>
+View Content
+</summary>
+
+:link: **Reference**
+- [jest-dom](https://github.com/testing-library/jest-dom#tohaveclass)
+---
+
+:blue_book: **Summary:** This is self explanatory. It checks if the specific element has a class that matches the string
+
+```js
+  test('to have class', () => {
+
+    const {debug, container} = render(<ColorBox/>)
+    
+    const box = container.querySelector("#color-box");
+    expect(box).toHaveClass("my-5") // will return true
+  })
+```
+
+</details>
+
+[go back :house:][home]
+
 
 ### toHaveStyle
 
