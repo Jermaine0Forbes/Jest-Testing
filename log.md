@@ -1,6 +1,38 @@
 
 # Logs 
 
+## 8-12-21
+
+### userEvent links
+
+[user-event](https://testing-library.com/docs/ecosystem-user-event/)
+
+###  userEvent for typing into input
+
+```js
+userEvent.type(firstName, "Jermaine");
+```
+
+###  userEvent for selecting options 
+
+```js
+
+userEvent.selectOptions(title, "Mr.");
+
+//or 
+userEvent.selectOptions(title, ["Mr.", "Ms."]);
+```
+
+### how to install and import userEvent
+
+```
+npm install --save-dev @testing-library/user-event @testing-library/dom
+```
+
+```
+import userEvent from '@testing-library/user-event'
+```
+
 ##  8-10-21
 
 ### jest-dom toBeVisible
