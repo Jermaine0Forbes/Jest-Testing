@@ -1,5 +1,18 @@
 
-# Logs 
+# Logs
+
+## 9-8-12
+
+Jest
+- [Making sure you're using the correct query](https://timdeschryver.dev/blog/making-sure-youre-using-the-correct-query)
+- [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+- [WAI-ARIA Roles needed when doing getByRole](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles)
+- [Jest-Dom methods](https://github.com/testing-library/jest-dom) 
+- [React testing library methods](https://testing-library.com/docs/react-testing-library/cheatsheet/)
+- [Jest Expect methods](https://jestjs.io/docs/expect) 
+- [Five Things You (Probably) Didn't Know About Testing Library](https://polvara.me/posts/five-things-you-didnt-know-about-testing-library)
+- [jest unexpected token when importing css](https://stackoverflow.com/questions/54627028/jest-unexpected-token-when-importing-css)
+
 
 ## 8-12-21
 
